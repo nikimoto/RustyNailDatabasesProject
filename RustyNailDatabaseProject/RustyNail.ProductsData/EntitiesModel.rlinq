@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DomainModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="2.0.0.0" name="ProductsModel" namespace="RustyNail.ProductsData" showPropertiesCompartment="true" xmlns="http://www.telerik.com/ORM">
+  <orm:orm name="ProductsModel" backend="mysql" xmlns:orm="http://tempuri.org/ORM">
+    <orm:namespace name="RustyNail.ProductsData" default="true">
+      <orm:class name="Vendor" uniqueId="c3f0903c-886a-45b5-9f8c-cc83db53d8b5">
+        <orm:table name="vendors" />
+        <orm:identity>
+          <orm:single-field field-name="_id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_id" property="Id" behavior="readwrite" uniqueId="5ded5c62-dd21-4ef2-9b37-bb49949aa3a3" type="System.Int32">
+          <orm:column name="Id" sql-type="integer" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_vendorName" property="VendorName" behavior="readwrite" uniqueId="c5103d0f-2ca0-48b0-af43-87461106a309" type="System.String">
+          <orm:column name="VendorName" sql-type="varchar" nullable="true" length="45" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_products" property="Products" behavior="readwrite" uniqueId="594790b7-678d-4f6d-a375-61a2f79269c0" type="RustyNail.ProductsData.Product">
+          <orm:collection element-class="RustyNail.ProductsData.Product" inverse-field="_vendor" order-by="" uniqueId="efcaf93e-e8e9-4fe8-a027-895b0afd73c4" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="Product" uniqueId="89b54036-d9a9-4c66-83bc-517a0463e6d1">
+        <orm:table name="products" />
+        <orm:identity>
+          <orm:single-field field-name="_id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_id" property="Id" behavior="readwrite" uniqueId="7664bdc9-fba1-4c3d-acea-787b39a11216" type="System.Int32">
+          <orm:column name="Id" sql-type="integer" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_productName" property="ProductName" behavior="readwrite" uniqueId="eecaccc7-7522-4ff1-99ee-0975a935b4f2" type="System.String">
+          <orm:column name="ProductName" sql-type="varchar" nullable="false" length="45" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_basePrice" property="BasePrice" behavior="readwrite" uniqueId="6db8980b-d2a5-47cf-9594-80f9116be884" type="System.Decimal">
+          <orm:column name="BasePrice" sql-type="decimal" nullable="false" length="6" scale="2" ado-type="Decimal" />
+        </orm:field>
+        <orm:field name="_vendors_Id" property="Vendors_Id" behavior="readwrite" uniqueId="0d792235-0bfb-4819-9b94-c8f12af33c2a" type="System.Int32">
+          <orm:column name="vendors_Id" sql-type="integer" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_measures_Id" property="Measures_Id" behavior="readwrite" uniqueId="8c100095-d10e-4ffb-a57a-9d272293ea88" type="System.Int32">
+          <orm:column name="measures_Id" sql-type="integer" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_measure" property="Measure" behavior="readwrite" uniqueId="efc48c69-4f99-40a9-a278-108108a8e498" type="RustyNail.ProductsData.Measure">
+          <orm:reference uniqueId="28cf490d-0541-4d1e-aba1-3ffa310c7b91">
+            <orm:sharedfield name="_measures_Id" target-class="RustyNail.ProductsData.Measure" target-field="_id" />
+            <orm:constraint name="fk_products_measures1" destination-table="measures" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="_vendor" property="Vendor" behavior="readwrite" uniqueId="d279ebe6-b240-46d2-b99a-b993fdb7492c" type="RustyNail.ProductsData.Vendor">
+          <orm:reference uniqueId="efcaf93e-e8e9-4fe8-a027-895b0afd73c4">
+            <orm:sharedfield name="_vendors_Id" target-class="RustyNail.ProductsData.Vendor" target-field="_id" />
+            <orm:constraint name="fk_products_vendors" destination-table="vendors" />
+          </orm:reference>
+        </orm:field>
+        <orm:index name="fk_products_measures1_idx">
+          <orm:columnMapping>
+            <orm:column name="measures_Id" sql-type="integer" nullable="false" length="0" scale="0" ado-type="Int32" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:index name="fk_products_vendors_idx">
+          <orm:columnMapping>
+            <orm:column name="vendors_Id" sql-type="integer" nullable="false" length="0" scale="0" ado-type="Int32" />
+          </orm:columnMapping>
+        </orm:index>
+      </orm:class>
+      <orm:class name="Measure" uniqueId="0253fe37-4d0a-47e7-89a0-25421e91c140">
+        <orm:table name="measures" />
+        <orm:identity>
+          <orm:single-field field-name="_id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_id" property="Id" behavior="readwrite" uniqueId="d64c5679-a557-475e-aa52-9112ff82d6ec" type="System.Int32">
+          <orm:column name="Id" sql-type="integer" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_measureName" property="MeasureName" behavior="readwrite" uniqueId="09d06362-7d98-46b7-98aa-1480b82bb69d" type="System.String">
+          <orm:column name="MeasureName" sql-type="varchar" nullable="true" length="45" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_products" property="Products" behavior="readwrite" uniqueId="33f50903-b6c1-463f-9cde-236951c140dd" type="RustyNail.ProductsData.Product">
+          <orm:collection element-class="RustyNail.ProductsData.Product" inverse-field="_measure" order-by="" uniqueId="28cf490d-0541-4d1e-aba1-3ffa310c7b91" />
+        </orm:field>
+      </orm:class>
+    </orm:namespace>
+    <orm:schema schema="">
+      <orm:table name="vendors">
+        <orm:column name="Id" sql-type="integer" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        <orm:column name="VendorName" sql-type="varchar" nullable="true" length="45" scale="0" ado-type="StringVariableLength" />
+      </orm:table>
+      <orm:table name="products">
+        <orm:column name="Id" sql-type="integer" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        <orm:column name="ProductName" sql-type="varchar" nullable="false" length="45" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="BasePrice" sql-type="decimal" nullable="false" length="6" scale="2" ado-type="Decimal" />
+        <orm:column name="vendors_Id" sql-type="integer" nullable="false" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="measures_Id" sql-type="integer" nullable="false" length="0" scale="0" ado-type="Int32" />
+        <orm:index name="fk_products_measures1_idx">
+          <orm:columnMapping>
+            <orm:column name="measures_Id" sql-type="integer" nullable="false" length="0" scale="0" ado-type="Int32" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:index name="fk_products_vendors_idx">
+          <orm:columnMapping>
+            <orm:column name="vendors_Id" sql-type="integer" nullable="false" length="0" scale="0" ado-type="Int32" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:constraint name="fk_products_measures1" destination-table="measures">
+          <orm:column name="measures_Id" sql-type="integer" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:constraint>
+        <orm:constraint name="fk_products_vendors" destination-table="vendors">
+          <orm:column name="vendors_Id" sql-type="integer" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:constraint>
+      </orm:table>
+      <orm:table name="measures">
+        <orm:column name="Id" sql-type="integer" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        <orm:column name="MeasureName" sql-type="varchar" nullable="true" length="45" scale="0" ado-type="StringVariableLength" />
+      </orm:table>
+    </orm:schema>
+    <orm:relational-naming-settings>
+      <orm:remove-camel-case>False</orm:remove-camel-case>
+      <orm:source-strategy>Property</orm:source-strategy>
+    </orm:relational-naming-settings>
+  </orm:orm>
+  <ModelSettings xmlns="">
+    <AppConfigConnectionPropertyName>Connection</AppConfigConnectionPropertyName>
+    <AppConfigConnectionString>database=supermarket;server=192.168.192.130;uid=rusty;pwd=123123</AppConfigConnectionString>
+    <NamingSettings>
+      <ClassRules>
+        <CaseMode>PascalCase</CaseMode>
+        <PluralizationMode>Singularize</PluralizationMode>
+      </ClassRules>
+      <FieldRules>
+        <AddPrefix>_</AddPrefix>
+        <CaseMode>CamelCase</CaseMode>
+      </FieldRules>
+      <PropertyRules>
+        <CaseMode>PascalCase</CaseMode>
+      </PropertyRules>
+    </NamingSettings>
+    <CodeGenerationSettings>
+      <MappingDefinitionType>Xml</MappingDefinitionType>
+    </CodeGenerationSettings>
+    <SchemaUpdateSettings />
+    <BackendConfigurationSettings>
+      <BackendConfiguration>
+        <Backend>MySql</Backend>
+        <ProviderName>MySql.Data.MySqlClient</ProviderName>
+      </BackendConfiguration>
+    </BackendConfigurationSettings>
+  </ModelSettings>
+  <Types>
+    <DomainClass Id="c3f0903c-886a-45b5-9f8c-cc83db53d8b5" name="Vendor" namespace="RustyNail.ProductsData" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="5ded5c62-dd21-4ef2-9b37-bb49949aa3a3" name="Id" type="Int32" label="Id : Int32" kind="Persistent" identity="true" fieldName="_id" />
+      <Property Id="c5103d0f-2ca0-48b0-af43-87461106a309" name="VendorName" label="VendorName : String" kind="Persistent" fieldName="_vendorName" />
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="cdcd6b83-6bde-4a73-a99a-d53ecf2c3cb6">
+          <NavigationalProperty Id="594790b7-678d-4f6d-a375-61a2f79269c0" name="Products" type="IList&lt;Product&gt;" label="Products : IList&lt;Product&gt;" nullable="true" kind="Persistent" fieldName="_products" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="89b54036-d9a9-4c66-83bc-517a0463e6d1" name="Product" namespace="RustyNail.ProductsData" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="7664bdc9-fba1-4c3d-acea-787b39a11216" name="Id" type="Int32" label="Id : Int32" kind="Persistent" identity="true" fieldName="_id" />
+      <Property Id="6db8980b-d2a5-47cf-9594-80f9116be884" name="BasePrice" type="Decimal" label="BasePrice : Decimal" kind="Persistent" fieldName="_basePrice" />
+      <Property Id="8c100095-d10e-4ffb-a57a-9d272293ea88" name="Measures_Id" type="Int32" label="Measures_Id : Int32" kind="Persistent" fieldName="_measures_Id" />
+      <Property Id="eecaccc7-7522-4ff1-99ee-0975a935b4f2" name="ProductName" label="ProductName : String" kind="Persistent" fieldName="_productName" />
+      <Property Id="0d792235-0bfb-4819-9b94-c8f12af33c2a" name="Vendors_Id" type="Int32" label="Vendors_Id : Int32" kind="Persistent" fieldName="_vendors_Id" />
+      <AssociationTargets>
+        <Association Id="28cf490d-0541-4d1e-aba1-3ffa310c7b91" SourceMultiplicity="One" name="ProductHasMeasure">
+          <DomainClassMoniker name="/ProductsModel/Measure" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="3a16157b-eaa6-42b9-8984-0d3db717bac0">
+              <NavigationalPropertyMoniker name="/ProductsModel/Measure/Products" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="3d8f3694-71ea-4c74-9fc5-48ceb48e58bd">
+              <NavigationalPropertyMoniker name="/ProductsModel/Product/Measure" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+        <Association Id="efcaf93e-e8e9-4fe8-a027-895b0afd73c4" SourceMultiplicity="One" name="ProductHasVendor">
+          <DomainClassMoniker name="/ProductsModel/Vendor" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="e64db479-9361-40d7-9060-794ae15b17da">
+              <NavigationalPropertyMoniker name="/ProductsModel/Vendor/Products" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="0b1cb1d2-892e-4066-9997-ae339fcb995e">
+              <NavigationalPropertyMoniker name="/ProductsModel/Product/Vendor" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+      </AssociationTargets>
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="86247558-1e7a-4bb9-9afb-0ead1dfa14ec">
+          <NavigationalProperty Id="efc48c69-4f99-40a9-a278-108108a8e498" name="Measure" type="Measure" label="Measure : Measure" nullable="true" kind="Persistent" fieldName="_measure" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="1f070b6e-04dd-4851-9eaa-9af1dcc78b83">
+          <NavigationalProperty Id="d279ebe6-b240-46d2-b99a-b993fdb7492c" name="Vendor" type="Vendor" label="Vendor : Vendor" nullable="true" kind="Persistent" fieldName="_vendor" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="0253fe37-4d0a-47e7-89a0-25421e91c140" name="Measure" namespace="RustyNail.ProductsData" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="d64c5679-a557-475e-aa52-9112ff82d6ec" name="Id" type="Int32" label="Id : Int32" kind="Persistent" identity="true" fieldName="_id" />
+      <Property Id="09d06362-7d98-46b7-98aa-1480b82bb69d" name="MeasureName" label="MeasureName : String" kind="Persistent" fieldName="_measureName" />
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="d73d297b-4bb1-41e7-b23d-8100d1d0062f">
+          <NavigationalProperty Id="33f50903-b6c1-463f-9cde-236951c140dd" name="Products" type="IList&lt;Product&gt;" label="Products : IList&lt;Product&gt;" nullable="true" kind="Persistent" fieldName="_products" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+  </Types>
+  <domainContext>
+    <domainModelHasDomainContext Id="e2f5805f-7b2d-4612-afc2-f4aa8f6d3b30">
+      <domainContainer name="ProductsModel" namespace="RustyNail.ProductsData" showPropertiesCompartment="true">
+        <entitySetProperty name="Vendors" namespace="RustyNail.ProductsData" type="Vendor" label="Vendors : IQueryable&lt;RustyNail.ProductsData.Vendor&gt;" />
+        <entitySetProperty name="Products" namespace="RustyNail.ProductsData" type="Product" label="Products : IQueryable&lt;RustyNail.ProductsData.Product&gt;" />
+        <entitySetProperty name="Measures" namespace="RustyNail.ProductsData" type="Measure" label="Measures : IQueryable&lt;RustyNail.ProductsData.Measure&gt;" />
+      </domainContainer>
+    </domainModelHasDomainContext>
+  </domainContext>
+</DomainModel>
